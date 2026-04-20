@@ -1,0 +1,51 @@
+:root {
+    --primary-color: #2563eb;
+    --bg-color: #f8fafc;
+}
+
+body { 
+    background-color: var(--bg-color); 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+}
+
+.main-header {
+    background: linear-gradient(135deg, #1e40af, #2563eb);
+    color: white;
+    padding: 40px 0;
+    margin-bottom: 30px;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.card { 
+    border-radius: 12px; 
+    border: none; 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.project-card {
+    border-top: 4px solid var(--primary-color);
+}
+
+.badge-tech {
+    background-color: #dbeafe;
+    color: #1e40af;
+    font-size: 0.8rem;
+    padding: 5px 12px;
+    border-radius: 20px;
+    display: inline-block;
+}
