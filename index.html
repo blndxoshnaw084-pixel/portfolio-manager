@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blnd Abdulla Hamad - Portfolio Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f6f9; }
+        .card { border-radius: 10px; border: none; }
+        .project-card { border-left: 5px solid #0d6efd; transition: 0.3s; }
+        .project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="p-4">
+
+<div class="container">
+    <h2 class="text-center mb-5 text-primary fw-bold">My Portfolio Manager</h2>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card p-4 shadow-sm">
+                <h4 class="mb-4">Add New Project</h4>
+                <form id="projectForm">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Project Title</label>
+                        <input type="text" name="title" class="form-control" required placeholder="e.g., ABL Education Website">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Technology Used</label>
+                        <input type="text" name="technology_used" class="form-control" required placeholder="e.g., HTML, PHP, MySQL">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Description</label>
+                        <textarea name="description" class="form-control" rows="3" required placeholder="Project details..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Save Project</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <h4 class="mb-4 border-bottom pb-2">Projects List</h4>
+            <div class="row" id="projectsList">
+                </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // نەخشەیەک بۆ هێنانەوەی پڕۆژەکان
+    function loadProjects() {
+        fetch('get_projects.php')
+        .then(response => response.json())
+        .then(data => {
+            let list = document.getElementById('projectsList');
+            list.innerHTML = ''; // پاککردنەوەی شاشەکە پێش دانانی داتای نوێ
+            
+            if(data.length === 0) {
+                list.innerHTML = '<p class="text-muted">No projects found. Add your first project!</p>';
+                return;
+            }
+
+            data.forEach(project => {
+                list.innerHTML += `
+                    <div class="col-md-6 mb-4">
+                        <div class="card project-card shadow-sm p-3 h-100">
+                            <h5 class="text-primary fw-bold">${project.title}</h5>
+                            <h6 class="text-secondary mb-3"><span class="badge bg-secondary">${project.technology_used}</span></h6>
+                            <p class="mb-0 text-muted">${project.description}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        });
+    }
+
+    // ناردنی داتاکان کاتێک فۆڕمەکە پڕدەکرێتەوە
+    document.getElementById('projectForm').addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        
+        let formData = new FormData(this);
+
+        fetch('add_project.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.status === 'success') {
+                this.reset(); // فۆڕمەکە خاڵی بکەرەوە
+                loadProjects(); // ڕاستەوخۆ پڕۆژە نوێیەکە نیشان بدە
+            } else {
+                alert("Error saving project!");
+            }
+        });
+    });
+
+    // کاتێک پەڕەکە دەکرێتەوە ڕاستەوخۆ پڕۆژەکان بهێنە
+    loadProjects();
+</script>
+
+</body>
+</html>
