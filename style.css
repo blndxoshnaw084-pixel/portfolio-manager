@@ -1,6 +1,7 @@
 :root {
-    --primary-color: #2563eb;
-    --bg-color: #f8fafc;
+    /* لێرە ناوی ڕەنگە سەرەکییەکانمان داناوە */
+    --primary-color: blue;
+    --bg-color: WhiteSmoke;
 }
 
 body { 
@@ -10,22 +11,25 @@ body {
 }
 
 .main-header {
-    background: linear-gradient(135deg, #1e40af, #2563eb);
+    /* بەکارهێنانی شین و شینی تۆخ بۆ هێدەرەکە */
+    background: linear-gradient(135deg, DarkBlue, Blue);
     color: white;
     padding: 40px 0;
     margin-bottom: 30px;
     border-radius: 0 0 20px 20px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card { 
+    background-color: white;
     border-radius: 12px; 
     border: none; 
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
 }
 
 .btn-primary {
     background-color: var(--primary-color);
+    color: white;
     border: none;
     padding: 10px 20px;
     font-weight: 600;
@@ -33,19 +37,28 @@ body {
 }
 
 .btn-primary:hover {
-    background-color: #1d4ed8;
+    background-color: DarkBlue;
     transform: translateY(-2px);
 }
 
 .project-card {
-    border-top: 4px solid var(--primary-color);
+    border-top: 4px solid Blue;
 }
 
 .badge-tech {
-    background-color: #dbeafe;
-    color: #1e40af;
+    background-color: LightBlue;
+    color: DarkBlue;
     font-size: 0.8rem;
-    padding: 5px 12px;
+    padding: 4px 10px;
     border-radius: 20px;
     display: inline-block;
+}
+
+/* ڕەنگی دەقەکان */
+.text-primary {
+    color: Blue !important;
+}
+
+.text-muted {
+    color: Gray !important;
 }
