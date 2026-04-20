@@ -48,13 +48,13 @@
 </div>
 
 <script>
-    // نەخشەیەک بۆ هێنانەوەی پڕۆژەکان
     function loadProjects() {
-        fetch('get_projects.php')
+        // گۆڕینی لینکەکە بۆ لۆکاڵهۆست
+        fetch('http://localhost/portfolio/get_projects.php')
         .then(response => response.json())
         .then(data => {
             let list = document.getElementById('projectsList');
-            list.innerHTML = ''; // پاککردنەوەی شاشەکە پێش دانانی داتای نوێ
+            list.innerHTML = ''; 
             
             if(data.length === 0) {
                 list.innerHTML = '<p class="text-muted">No projects found. Add your first project!</p>';
@@ -72,31 +72,32 @@
                     </div>
                 `;
             });
-        });
+        })
+        .catch(error => console.error("Error connecting to localhost database", error));
     }
 
-    // ناردنی داتاکان کاتێک فۆڕمەکە پڕدەکرێتەوە
     document.getElementById('projectForm').addEventListener('submit', function(e) {
         e.preventDefault(); 
         
         let formData = new FormData(this);
 
-        fetch('add_project.php', {
+        // گۆڕینی لینکەکە بۆ لۆکاڵهۆست
+        fetch('http://localhost/portfolio/add_project.php', {
             method: 'POST',
             body: formData
         })
         .then(response => response.json())
         .then(data => {
             if(data.status === 'success') {
-                this.reset(); // فۆڕمەکە خاڵی بکەرەوە
-                loadProjects(); // ڕاستەوخۆ پڕۆژە نوێیەکە نیشان بدە
+                this.reset(); 
+                loadProjects(); 
             } else {
                 alert("Error saving project!");
             }
-        });
+        })
+        .catch(error => console.error("Error connecting to localhost database", error));
     });
 
-    // کاتێک پەڕەکە دەکرێتەوە ڕاستەوخۆ پڕۆژەکان بهێنە
     loadProjects();
 </script>
 

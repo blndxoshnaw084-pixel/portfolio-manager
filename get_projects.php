@@ -1,4 +1,6 @@
 <?php
+// ڕێگەپێدان بە وێبسایتەکەی GitHub بۆ وەرگرتنی داتا
+header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 require 'db.php';
 

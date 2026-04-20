@@ -1,4 +1,6 @@
 <?php
+// ڕێگەپێدان بە وێبسایتەکەی GitHub بۆ ناردنی داتا
+header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 require 'db.php';
 
@@ -7,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tech = $_POST['technology_used'];
     $desc = $_POST['description'];
 
-    // زیادکردنی پڕۆژە نوێیەکە بۆ ناو خشتەکە
     $sql = "INSERT INTO projects (title, technology_used, description) VALUES ('$title', '$tech', '$desc')";
     
     if ($conn->query($sql) === TRUE) {
